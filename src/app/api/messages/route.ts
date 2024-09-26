@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (request: NextRequest) => {
   const roomId = request.nextUrl.searchParams.get("roomId");
   readDB();
-  let rooms = (<Database>DB).rooms;
+  const rooms = (<Database>DB).rooms;
   const room = rooms.find((r) => r.roomId === roomId);
   if (!room) {
     return NextResponse.json(
@@ -17,7 +17,7 @@ export const GET = async (request: NextRequest) => {
       { status: 404 }
     );
   }
-  let messages = (<Database>DB).messages.filter((m) => m.roomId === roomId);
+  const messages = (<Database>DB).messages.filter((m) => m.roomId === roomId);
   return NextResponse.json({
     ok: true,
     message: messages,
@@ -27,7 +27,7 @@ export const GET = async (request: NextRequest) => {
 export const POST = async (request: NextRequest) => {
   const body = await request.json();
   readDB();
-  let data = <Database>DB;
+  const data = <Database>DB;
   const room = data.rooms.find((r) => r.roomId === body.roomId);
   if (!room) {
     return NextResponse.json(
@@ -66,7 +66,7 @@ export const DELETE = async (request: NextRequest) => {
   }
   const body = await request.json();
   readDB();
-  let messages = (<Database>DB).messages;
+  const messages = (<Database>DB).messages;
   const message = messages.find((m) => m.messageId === body.messageId);
   if (!message) {
     return NextResponse.json(

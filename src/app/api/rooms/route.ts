@@ -1,11 +1,11 @@
-import { Database, DB, readDB, Room, writeDB } from "@lib/DB";
+import { Database, DB, readDB, writeDB } from "@lib/DB";
 import { checkToken } from "@lib/checkToken";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async () => {
   readDB();
-  let rooms = (<Database>DB).rooms;
+  const rooms = (<Database>DB).rooms;
   return NextResponse.json({
     ok: true,
     rooms: rooms,
